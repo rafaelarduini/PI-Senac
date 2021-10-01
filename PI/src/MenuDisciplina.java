@@ -62,12 +62,12 @@ public class MenuDisciplina {
 			
 			System.out.print("\n\nConfirmar cadastro? (S/N)\n");
 			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				novaDisciplina.Adicionar();
 				
 				System.out.print("Realizar novo cadastro? (S/N)\n");
 				
-				if(menu.nextLine().contains("S")) {
+				if(menu.nextLine().toUpperCase().contains("S")) {
 					Cadastrar();
 				}
 				else {
@@ -126,12 +126,12 @@ public class MenuDisciplina {
 	        
 	        System.out.print("\n\nConfirmar atualização? (S/N)\n");
 			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				disciplinaSelecionada.Atualizar();
 				
 				System.out.print("Realizar nova atualização? (S/N)\n");
 				
-				if(menu.nextLine().contains("S")) {
+				if(menu.nextLine().toUpperCase().contains("S")) {
 					Atualizar();
 				}
 				else {
@@ -203,12 +203,12 @@ public class MenuDisciplina {
 	        
 	        System.out.print("\n\nConfirmar exclusão? (S/N)\n");
 			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				disciplinaSelecionada.Remover();
 				
 				System.out.print("Realizar nova exclusão? (S/N)\n");
 				
-				if(menu.nextLine().contains("S")) {
+				if(menu.nextLine().toUpperCase().contains("S")) {
 					Atualizar();
 				}
 				else {

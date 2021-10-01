@@ -63,12 +63,12 @@ public class MenuAluno {
 			novoAluno = ObtemDadosAluno(novoAluno);
 			
 			System.out.print("Cadastrar endereço? (S/N)\n");			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				novoAluno.setEndereco(ObtemDadosEndereco());
 			}
 			
 			System.out.print("Cadastrar boletim? (S/N)\n");			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				novoAluno.setBoletim(ObtemDadosBoletim());
 			}
 		
@@ -78,12 +78,12 @@ public class MenuAluno {
 			
 			System.out.print("\n\nConfirmar cadastro? (S/N)\n");
 			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				novoAluno.Adicionar();
 				
 				System.out.print("Realizar novo cadastro? (S/N)\n");
 				
-				if(menu.nextLine().contains("S")) {
+				if(menu.nextLine().toUpperCase().contains("S")) {
 					Cadastrar();
 				}
 				else {
@@ -226,12 +226,12 @@ public class MenuAluno {
 	        
 	        System.out.print("\n\nConfirmar atualização? (S/N)\n");
 			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				alunoSelecionado.Atualizar();
 				
 				System.out.print("Realizar nova atualização? (S/N)\n");
 				
-				if(menu.nextLine().contains("S")) {
+				if(menu.nextLine().toUpperCase().contains("S")) {
 					Atualizar();
 				}
 				else {
@@ -272,12 +272,12 @@ public class MenuAluno {
 				
 				System.out.print("\n\nAdicionar? (S/N)\n");
 				
-				if(menu.nextLine().contains("S")) {
+				if(menu.nextLine().toUpperCase().contains("S")) {
 					novoBoletim.addDisciplinaCursada(novaDisciplinaCursada);
 					
 					System.out.print("Adicionar nova disciplina? (S/N)\n");
 					
-					if(!menu.nextLine().contains("S")) {
+					if(!menu.nextLine().toUpperCase().contains("S")) {
 						break;
 					}
 					
@@ -349,12 +349,12 @@ public class MenuAluno {
 	        
 	        System.out.print("\n\nConfirmar exclusão? (S/N)\n");
 			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				alunoSelecionado.Remover();
 				
 				System.out.print("Realizar nova exclusão? (S/N)\n");
 				
-				if(menu.nextLine().contains("S")) {
+				if(menu.nextLine().toUpperCase().toUpperCase().contains("S")) {
 					Atualizar();
 				}
 				else {
@@ -393,12 +393,12 @@ public class MenuAluno {
 			System.out.print(alunoSelecionado.getBoletim());
 
 			System.out.print("Inserir notas? (S/N)\n");			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				alunoSelecionado = AdicionaNotasBoletim(alunoSelecionado);  
 			}
 			
 			System.out.print("Inserir frequência? (S/N)\n");			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				alunoSelecionado = AdicionaNotasFrequencia(alunoSelecionado);
 			}			
 	        
@@ -414,12 +414,12 @@ public class MenuAluno {
 	        
 	        System.out.print("\n\nConfirmar alterações? (S/N)\n");
 			
-			if(menu.nextLine().contains("S")) {
+			if(menu.nextLine().toUpperCase().contains("S")) {
 				alunoSelecionado.Atualizar();
 				
 				System.out.print("Realizar nova avaliação? (S/N)\n");
 				
-				if(menu.nextLine().contains("S")) {
+				if(menu.nextLine().toUpperCase().contains("S")) {
 					Avaliar();
 				}
 				else {
