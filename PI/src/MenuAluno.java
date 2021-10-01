@@ -102,7 +102,7 @@ public class MenuAluno {
 		String valorDigitado = null;
 		
 		try {			
-			System.out.print("\nDados do Aluno\n");
+			System.out.print("\nDados do Aluno\n\n");
 			
 			System.out.print("Informe o nome:\n");		
 			aluno.setNome( menu.nextLine());

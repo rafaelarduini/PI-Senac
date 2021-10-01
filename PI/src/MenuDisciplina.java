@@ -237,8 +237,7 @@ public class MenuDisciplina {
 	    } catch (Exception e) {
 	        return false;
 	    }
-	}
-	
+	}	
 	
 	public static boolean isValidIndex(String text, List<Object> lista) {
 	    try {
