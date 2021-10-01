@@ -3,13 +3,12 @@ import java.util.Scanner;
 
 public class MenuDisciplina {
 	
-	public void AbrirMenu() {
-		
-		Scanner menu = new Scanner (System.in);
+	public void AbrirMenu(Scanner menu) {
 		
 		try {	
 		
 			while (true) {
+				
 				System.out.print("\nMenu Disciplina\n\n");
 		        System.out.print("Opção 1 - Cadastrar \n");
 		        System.out.print("Opção 2 - Atualizar \n");
@@ -20,16 +19,17 @@ public class MenuDisciplina {
 		        String opcao = menu.nextLine();
 		
 		        switch (opcao) {
+		        
 		        case "1":	        	
-		        	Cadastrar();		        	
+		        	Cadastrar(menu);		        	
 		            break;
 		
 		        case "2":
-		        	Atualizar();
+		        	Atualizar(menu);
 		            break;
 		
 		        case "3":
-		        	Excluir();
+		        	Excluir(menu);
 		            break;		            
 		       		            
 		        case "4":
@@ -41,52 +41,48 @@ public class MenuDisciplina {
 		        }
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao abrir menu Disciplina. Retorno: " + e.getMessage());
 		}			
 	}	
 	
-	private void Cadastrar() {
-		
-		Scanner menu = new Scanner (System.in);
+	private void Cadastrar(Scanner menu) {
 		
 		try {
 			
-			Disciplina novaDisciplina = new Disciplina();
-			
-			novaDisciplina = ObtemDadosDisciplina(novaDisciplina);
-			
-			System.out.print("\nDodos do novo cadastro\n\n");
-					
-			System.out.print(novaDisciplina);
-			
-			System.out.print("\n\nConfirmar cadastro? (S/N)\n");
-			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				novaDisciplina.Adicionar();
+			while (true) {
 				
-				System.out.print("Realizar novo cadastro? (S/N)\n");
+				Disciplina novaDisciplina = new Disciplina();
+				
+				novaDisciplina = ObtemDadosDisciplina(novaDisciplina, menu);
+				
+				System.out.print("\nDados do novo cadastro\n\n");
+						
+				System.out.print(novaDisciplina);
+				
+				System.out.print("\n\nConfirmar cadastro? (S/N)\n");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
-					Cadastrar();
-				}
-				else {
-					AbrirMenu();
-				}
-				
-			}else {	
-				System.out.print("Novo cadastro apagado.\n");
-				AbrirMenu();
-			}	
+					novaDisciplina.Adicionar();
+					
+					System.out.print("Realizar novo cadastro? (S/N)\n");
+					
+					if(menu.nextLine().toUpperCase().contains("S"))
+						continue;					
+					else
+						break;
+					
+				}else {	
+					System.out.print("Novo cadastro apagado.\n");
+					break;
+				}	
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao cadastrar Disciplina. Retorno: " + e.getMessage());
 		}		
 	}
 	
-	private Disciplina ObtemDadosDisciplina(Disciplina disciplina) {
+	private Disciplina ObtemDadosDisciplina(Disciplina disciplina, Scanner menu) {
 		
-		Scanner menu = new Scanner (System.in);
 		String valorDigitado = null;
 		
 		try {			
@@ -94,11 +90,11 @@ public class MenuDisciplina {
 			System.out.print("Informe o nome:\n");		
 			disciplina.setNome( menu.nextLine());
 			
-			while (!isNumber(valorDigitado)) {				
-				System.out.print("\nCarga horária: ");			
+			while (!isInt(valorDigitado)) {				
+				System.out.print("\nCarga horária(h): ");			
 				valorDigitado = menu.nextLine();
 				
-				if(!isNumber(valorDigitado))
+				if(!isInt(valorDigitado))
 					System.out.print("Valor inválido.\n");
 			}
 			
@@ -106,58 +102,59 @@ public class MenuDisciplina {
 			valorDigitado = null;				
 			
 		}catch(Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao obter dados da Disciplina. Retorno: " + e.getMessage());
 		}	
 		return disciplina;
 	}
 	
-	private void Atualizar() {
-		
-		Scanner menu = new Scanner (System.in);
+	private void Atualizar(Scanner menu) {
 		
 		try {
 			
-			Disciplina disciplinaSelecionada = ObtemDisciplinaSelecionada();			
-			  	
-        	disciplinaSelecionada = ObtemDadosDisciplina(disciplinaSelecionada);     	
-	         
-	        System.out.print(disciplinaSelecionada);
-	        
-	        System.out.print("\n\nConfirmar atualização? (S/N)\n");
-			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				disciplinaSelecionada.Atualizar();
+			while(true) {
 				
-				System.out.print("Realizar nova atualização? (S/N)\n");
+				Disciplina disciplinaSelecionada = ObtemDisciplinaSelecionada(menu);	
+				
+				if(disciplinaSelecionada == null) {
+					System.out.print("Atualização cancelada.\n");
+					break;
+				}
+				  	
+	        	disciplinaSelecionada = ObtemDadosDisciplina(disciplinaSelecionada, menu);     	
+		         
+		        System.out.print(disciplinaSelecionada);
+		        
+		        System.out.print("\n\nConfirmar atualização? (S/N)\n");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
-					Atualizar();
-				}
-				else {
-					AbrirMenu();
-				}
-				
-			}else {	
-				System.out.print("Atualização cancelada.\n");
-				AbrirMenu();
-			}	
-			
+					disciplinaSelecionada.Atualizar();
+					
+					System.out.print("Realizar nova atualização? (S/N)\n");
+					
+					if(menu.nextLine().toUpperCase().contains("S"))
+						continue;					
+					else
+						break;
+					
+				}else {	
+					System.out.print("Atualização cancelada.\n");
+					break;
+				}	
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao atualizar Disciplina. Retorno: " + e.getMessage());
 		}	
 	}
 	
-	private Disciplina ObtemDisciplinaSelecionada() {
-		
-		Scanner menu = new Scanner (System.in);			
+	private Disciplina ObtemDisciplinaSelecionada(Scanner menu) {
+			
 		String valorDigitado = null;		
 		var listaDisciplinas = new Disciplina().Buscar();
+		int numeroElementos = listaDisciplinas.size();
 		
 		try {
 			
-			if(listaDisciplinas.size() == 0) {
+			if(numeroElementos == 0) {
 				System.out.print("Nenhuma disciplina disponívies.\n"
 							   + "Realizar o cadastro através do menu Cadastrar.\n"
 							   + "Digite 'OK' para continuar.\n");
@@ -174,66 +171,74 @@ public class MenuDisciplina {
 				System.out.print("Opção: " + indiceLista + " - Nome: " + ((Disciplina)disciplinaBD).getNome() + "\n");
 			}
 			
+			System.out.print("Opção: " + numeroElementos + " - Retornar\n");
+			
 			while(!isValidIndex(valorDigitado, listaDisciplinas)) {
 				System.out.print("\nEscolha uma opção :\n");
 				
 				valorDigitado = menu.nextLine();
+				
+				if(valorDigitado.contains(String.valueOf(numeroElementos))) {
+					return null;
+				}
 				
 				if(!isValidIndex(valorDigitado, listaDisciplinas))
 					System.out.print("Opção inválida.\n");
 			}	
 			
 			} catch (Exception e) {
-				e.printStackTrace();
-				menu.close();
+				System.out.print("Falha ao obter Disciplina da lista. Retorno: " + e.getMessage());
 			}
 		
 		return (Disciplina)(listaDisciplinas.get(Integer.parseInt(valorDigitado)));
 	}
 	
-	private void Excluir() {
-		
-		Scanner menu = new Scanner (System.in);
+	private void Excluir(Scanner menu) {
 		
 		try {
 			
-			Disciplina disciplinaSelecionada = ObtemDisciplinaSelecionada();
-			
-			System.out.print(disciplinaSelecionada);
-	        
-	        System.out.print("\n\nConfirmar exclusão? (S/N)\n");
-			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				disciplinaSelecionada.Remover();
+			while(true) {
 				
-				System.out.print("Realizar nova exclusão? (S/N)\n");
+				Disciplina disciplinaSelecionada = ObtemDisciplinaSelecionada(menu);
+				
+				if(disciplinaSelecionada == null) {
+					System.out.print("Exclusão cancelada.\n");
+					break;
+				}
+				
+				System.out.print(disciplinaSelecionada);
+		        
+		        System.out.print("\n\nConfirmar exclusão? (S/N)\n");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
-					Atualizar();
-				}
-				else {
-					AbrirMenu();
-				}
-				
-			}else {	
-				System.out.print("Atualização cancelada.\n");
-				AbrirMenu();
-			}	
-			
+					disciplinaSelecionada.Remover();
+					
+					System.out.print("Realizar nova exclusão? (S/N)\n");
+					
+					if(menu.nextLine().toUpperCase().contains("S"))
+						continue;					
+					else
+						break;
+					
+				}else {	
+					System.out.print("Exclusão cancelada.\n");
+					break;
+				}	
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao excluir Disciplina. Retorno: " + e.getMessage());
 		}	
 	}
 	
-	public static boolean isNumber(String text) {
+	public static boolean isInt(String text) {
 	    try {
-	        Double.parseDouble(text);
+	        Integer.parseInt(text);
 	        return true;
 	    } catch (Exception e) {
 	        return false;
 	    }
 	}
+	
 	
 	public static boolean isValidIndex(String text, List<Object> lista) {
 	    try {

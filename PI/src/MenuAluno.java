@@ -5,9 +5,7 @@ import java.util.Scanner;
 
 public class MenuAluno {
 	
-	public void AbrirMenu() {
-		
-		Scanner menu = new Scanner (System.in);
+	public void AbrirMenu(Scanner menu) {
 		
 		try {	
 		
@@ -38,7 +36,7 @@ public class MenuAluno {
 		        case "4":
 		        	Avaliar();
 		            
-		        case "5":
+		        case "5":		        	
 		        	return;
 		
 		        default:
@@ -47,8 +45,7 @@ public class MenuAluno {
 		        }
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao abrir menu Aluno. Retorno: " + e.getMessage());
 		}			
 	}	
 	
@@ -58,51 +55,50 @@ public class MenuAluno {
 		
 		try {
 			
-			Aluno novoAluno = new Aluno();
-			
-			novoAluno = ObtemDadosAluno(novoAluno);
-			
-			System.out.print("Cadastrar endereço? (S/N)\n");			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				novoAluno.setEndereco(ObtemDadosEndereco());
-			}
-			
-			System.out.print("Cadastrar boletim? (S/N)\n");			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				novoAluno.setBoletim(ObtemDadosBoletim());
-			}
-		
-			System.out.print("\nDodos do novo cadastro\n\n");
-					
-			System.out.print(novoAluno);
-			
-			System.out.print("\n\nConfirmar cadastro? (S/N)\n");
-			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				novoAluno.Adicionar();
+			while (true) {
 				
-				System.out.print("Realizar novo cadastro? (S/N)\n");
+				Aluno novoAluno = new Aluno();
+				
+				novoAluno = ObtemDadosAluno(novoAluno, menu);
+				
+				System.out.print("Cadastrar endereço? (S/N)\n");			
+				if(menu.nextLine().toUpperCase().contains("S")) {
+					novoAluno.setEndereco(ObtemDadosEndereco(menu));
+				}
+				
+				System.out.print("Cadastrar boletim? (S/N)\n");			
+				if(menu.nextLine().toUpperCase().contains("S")) {
+					novoAluno.setBoletim(ObtemDadosBoletim(menu));
+				}
+			
+				System.out.print("\nDodos do novo cadastro\n\n");
+						
+				System.out.print(novoAluno);
+				
+				System.out.print("Confirmar cadastro? (S/N)\n");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
-					Cadastrar();
-				}
-				else {
-					AbrirMenu();
-				}
-				
-			}else {	
-				System.out.print("Novo cadastro apagado.\n");
-				AbrirMenu();
-			}	
+					novoAluno.Adicionar();
+					
+					System.out.print("Realizar novo cadastro? (S/N)\n");
+					
+					if(menu.nextLine().toUpperCase().contains("S"))
+						continue;
+					else
+						break;
+					
+				}else {	
+					System.out.print("Novo cadastro apagado.\n");
+					break;
+				}	
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao cadastrar Aluno. Retorno: " + e.getMessage());
 		}		
 	}
 	
-	private Aluno ObtemDadosAluno(Aluno aluno) {
-		
-		Scanner menu = new Scanner (System.in);
+	private Aluno ObtemDadosAluno(Aluno aluno, Scanner menu) {
+
 		String valorDigitado = null;
 		
 		try {			
@@ -130,15 +126,13 @@ public class MenuAluno {
 			aluno.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(valorDigitado));
 			
 		}catch(ParseException e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao obter dados do Aluno. Retorno: " + e.getMessage());
 		}	
 		return aluno;
 	}
 	
-	private Endereco ObtemDadosEndereco() {
-		
-		Scanner menu = new Scanner (System.in);
+	private Endereco ObtemDadosEndereco(Scanner menu) {
+
 		var novoEndereco = new Endereco();
 		String valorDigitado = null;
 		
@@ -149,11 +143,11 @@ public class MenuAluno {
 			System.out.print("Informe o Logradouro:\n");		
 			novoEndereco.setLogradouro(menu.nextLine());
 			
-			while (!isNumber(valorDigitado)) {				
+			while (!isInt(valorDigitado)) {				
 				System.out.print("Informe o Numero:\n");			
 				valorDigitado = menu.nextLine();
 				
-				if(!isNumber(valorDigitado))
+				if(!isInt(valorDigitado))
 					System.out.print("Valor inválido.\n");
 			}
 
@@ -176,8 +170,7 @@ public class MenuAluno {
 			novoEndereco.setEstado(menu.nextLine());
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao obter dados de Endereço. Retorno: " + e.getMessage());
 		}	
 		return novoEndereco;
 	}
@@ -188,70 +181,73 @@ public class MenuAluno {
 		
 		try {
 			
-			Aluno alunoSelecionado = ObtemAlunoSelecionado();
-			
-			System.out.print("Aluno selecionado: " + alunoSelecionado.getNome());
-			
-			System.out.print("\n\nAtualizar:\n");
-	        System.out.print("Opção 1 - Dados do Aluno \n");
-	        System.out.print("Opção 2 - Endereço do aluno\n");
-	        System.out.print("Opção 3 - Boletim do aluno\n");
-	        System.out.print("Opção 4 - Retornar \n\n");
-	        System.out.print("Digite uma opção: ");
-	
-	        String opcao = menu.nextLine();
-	
-	        switch (opcao) {
-	        case "1":	        	
-	        	alunoSelecionado = ObtemDadosAluno(alunoSelecionado);     	
-	            break;
-	
-	        case "2":
-	        	alunoSelecionado.setEndereco(ObtemDadosEndereco());
-	            break;
-	
-	        case "3":	        	
-	        	alunoSelecionado.setBoletim(ObtemDadosBoletim());
-	            break;
-	            
-	        case "4":
-	        	AbrirMenu();
-	
-	        default:
-	            System.out.print("\nOpção Inválida!\n");
-	            break;	            
-	        }
-	        
-	        System.out.print(alunoSelecionado);
-	        
-	        System.out.print("\n\nConfirmar atualização? (S/N)\n");
-			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				alunoSelecionado.Atualizar();
+			while (true) {
 				
-				System.out.print("Realizar nova atualização? (S/N)\n");
+				Aluno alunoSelecionado = ObtemAlunoSelecionado(menu);
+				
+				if(alunoSelecionado == null) {
+					System.out.print("Atualização cancelada.\n");
+					break;
+				}
+				
+				System.out.print("Aluno selecionado: " + alunoSelecionado.getNome());
+				
+				System.out.print("\n\nAtualizar:\n");
+		        System.out.print("Opção 1 - Dados do Aluno \n");
+		        System.out.print("Opção 2 - Endereço do aluno\n");
+		        System.out.print("Opção 3 - Boletim do aluno\n");
+		        System.out.print("Opção 4 - Retornar \n\n");
+		        System.out.print("Digite uma opção: ");
+		
+		        String opcao = menu.nextLine();
+		
+		        switch (opcao) {
+		        case "1":	        	
+		        	alunoSelecionado = ObtemDadosAluno(alunoSelecionado, menu);     	
+		            break;
+		
+		        case "2":
+		        	alunoSelecionado.setEndereco(ObtemDadosEndereco(menu));
+		            break;
+		
+		        case "3":	        	
+		        	alunoSelecionado.setBoletim(ObtemDadosBoletim(menu));
+		            break;
+		            
+		        case "4":
+		        	return;
+		
+		        default:
+		            System.out.print("\nOpção Inválida!\n");
+		            break;	            
+		        }
+		        
+		        System.out.print(alunoSelecionado);
+		        
+		        System.out.print("\n\nConfirmar atualização? (S/N)\n");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
-					Atualizar();
-				}
-				else {
-					AbrirMenu();
-				}
-				
-			}else {	
-				System.out.print("Atualização cancelada.\n");
-				AbrirMenu();
-			}	
-			
+					alunoSelecionado.Atualizar();
+					
+					System.out.print("Realizar nova atualização? (S/N)\n");
+					
+					if(menu.nextLine().toUpperCase().contains("S"))
+						continue;
+					else
+						break;
+					
+				}else {	
+					System.out.print("Atualização cancelada.\n");
+					break;
+				}	
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao atualizar Aluno. Retorno: " + e.getMessage());
 		}	
 	}
 	
-	private Boletim ObtemDadosBoletim() {
+	private Boletim ObtemDadosBoletim(Scanner menu) {
 		
-		Scanner menu = new Scanner (System.in);
 		var novoBoletim = new Boletim();
 				
 		try {		
@@ -260,7 +256,7 @@ public class MenuAluno {
 			
 			while (true) {
 				
-				var disciplinaSelecionada = ObtemDisciplinaSelecionada();
+				var disciplinaSelecionada = ObtemDisciplinaSelecionada(menu);
 				
 				if(disciplinaSelecionada == null) {
 					return null;
@@ -277,29 +273,25 @@ public class MenuAluno {
 					
 					System.out.print("Adicionar nova disciplina? (S/N)\n");
 					
-					if(!menu.nextLine().toUpperCase().contains("S")) {
+					if(!menu.nextLine().toUpperCase().contains("S"))
 						break;
-					}
 					
 				}else {	
 					System.out.print("Nova disciplina apagada.\n");					
 				}		
-							
-			}			
-			
+				}	
 			} catch (Exception e) {
-				e.printStackTrace();
-				menu.close();
+				System.out.print("Falha ao obter dados do Boletim. Retorno: " + e.getMessage());
 			}		
 		
 		return novoBoletim;
 	}	
 	
-	private Disciplina ObtemDisciplinaSelecionada() {
-		
-		Scanner menu = new Scanner (System.in);			
+	private Disciplina ObtemDisciplinaSelecionada(Scanner menu) {
+
 		String valorDigitado = null;		
 		var listaDisciplinas = new Disciplina().Buscar();
+		int numeroElementos = listaDisciplinas.size();
 		
 		try {
 			
@@ -320,18 +312,23 @@ public class MenuAluno {
 				System.out.print("Opção: " + indiceLista + " - Nome: " + ((Disciplina)disciplinaBD).getNome() + "\n");
 			}
 			
+			System.out.print("Opção: " + numeroElementos + " - Retornar\n");
+			
 			while(!isValidIndex(valorDigitado, listaDisciplinas)) {
 				System.out.print("\nEscolha uma opção :\n");
 				
 				valorDigitado = menu.nextLine();
+				
+				if(valorDigitado.contains(String.valueOf(numeroElementos))) {
+					return null;
+				}
 				
 				if(!isValidIndex(valorDigitado, listaDisciplinas))
 					System.out.print("Opção inválida.\n");
 			}	
 			
 			} catch (Exception e) {
-				e.printStackTrace();
-				menu.close();
+				System.out.print("Falha ao obter disciplina da lista. Retorno: " + e.getMessage());
 			}
 		
 		return (Disciplina)(listaDisciplinas.get(Integer.parseInt(valorDigitado)));
@@ -343,32 +340,36 @@ public class MenuAluno {
 		
 		try {
 			
-			Aluno alunoSelecionado = ObtemAlunoSelecionado();
-			
-			System.out.print(alunoSelecionado);
-	        
-	        System.out.print("\n\nConfirmar exclusão? (S/N)\n");
-			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				alunoSelecionado.Remover();
+			while(true) {
 				
-				System.out.print("Realizar nova exclusão? (S/N)\n");
+				Aluno alunoSelecionado = ObtemAlunoSelecionado(menu);
 				
-				if(menu.nextLine().toUpperCase().toUpperCase().contains("S")) {
-					Atualizar();
-				}
-				else {
-					AbrirMenu();
+				if(alunoSelecionado == null) {
+					System.out.print("Exclusão cancelada.\n");
+					break;
 				}
 				
-			}else {	
-				System.out.print("Atualização cancelada.\n");
-				AbrirMenu();
-			}	
-			
+				System.out.print(alunoSelecionado);
+		        
+		        System.out.print("\n\nConfirmar exclusão? (S/N)\n");
+				
+				if(menu.nextLine().toUpperCase().contains("S")) {
+					alunoSelecionado.Remover();
+					
+					System.out.print("Realizar nova exclusão? (S/N)\n");
+					
+					if(menu.nextLine().toUpperCase().toUpperCase().contains("S"))
+						continue;					
+					else
+						break;
+					
+				}else {	
+					System.out.print("Atualização cancelada.\n");
+					break;
+				}	
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao excluir aluno. Retorno: " + e.getMessage());
 		}	
 	}
 	
@@ -378,68 +379,71 @@ public class MenuAluno {
 		
 		try {
 			
-			Aluno alunoSelecionado = ObtemAlunoSelecionado();
-			
-			if (alunoSelecionado.getBoletim() == null) {
-				System.out.print("Aluno ainda não possui um boletim cadastrado.\n"
-								+"Você pode adicionar um boletim através do menu Atualizar Aluno.\n"
-								+ "Digite 'OK' para continuar.\n");
-				menu.nextLine();
-				return;
-			}
-		
-			System.out.print("Boletim do aluno: " + alunoSelecionado.getNome() + "\n\n");
-			
-			System.out.print(alunoSelecionado.getBoletim());
-
-			System.out.print("Inserir notas? (S/N)\n");			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				alunoSelecionado = AdicionaNotasBoletim(alunoSelecionado);  
-			}
-			
-			System.out.print("Inserir frequência? (S/N)\n");			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				alunoSelecionado = AdicionaNotasFrequencia(alunoSelecionado);
-			}			
-	        
-			alunoSelecionado.AvaliarAluno();
-			
-	        System.out.print("\nBoletim do aluno\n\n" + alunoSelecionado.getBoletim());
-	        
-	        if (alunoSelecionado.isAprovado()) {
-				System.out.print("Aluno aprovado!");
-			}else {
-				System.out.print("Aluno reprovado!");
-			}	
-	        
-	        System.out.print("\n\nConfirmar alterações? (S/N)\n");
-			
-			if(menu.nextLine().toUpperCase().contains("S")) {
-				alunoSelecionado.Atualizar();
+			while(true) {
 				
-				System.out.print("Realizar nova avaliação? (S/N)\n");
+				Aluno alunoSelecionado = ObtemAlunoSelecionado(menu);
+				
+				if(alunoSelecionado == null) {
+					System.out.print("Avaliação cancelada.\n");
+					break;
+				}
+				
+				if (alunoSelecionado.getBoletim() == null) {
+					System.out.print("Aluno ainda não possui um boletim cadastrado.\n"
+									+"Você pode adicionar um boletim através do menu Atualizar Aluno.\n"
+									+ "Digite 'OK' para continuar.\n");
+					menu.nextLine();
+					break;
+				}
+			
+				System.out.print("Boletim do aluno: " + alunoSelecionado.getNome() + "\n\n");
+				
+				System.out.print(alunoSelecionado.getBoletim());
+
+				System.out.print("Inserir notas? (S/N)\n");			
+				if(menu.nextLine().toUpperCase().contains("S")) {
+					alunoSelecionado = AdicionaNotasBoletim(alunoSelecionado, menu);  
+				}
+				
+				System.out.print("Inserir frequência? (S/N)\n");			
+				if(menu.nextLine().toUpperCase().contains("S")) {
+					alunoSelecionado = AdicionaFrequencia(alunoSelecionado, menu);
+				}			
+		        
+				alunoSelecionado.AvaliarAluno();
+				
+		        System.out.print("\nBoletim do aluno\n\n" + alunoSelecionado.getBoletim());
+		        
+		        if (alunoSelecionado.isAprovado()) {
+					System.out.print("Aluno aprovado!");
+				}else {
+					System.out.print("Aluno reprovado!");
+				}	
+		        
+		        System.out.print("\n\nConfirmar alterações? (S/N)\n");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
-					Avaliar();
+					alunoSelecionado.Atualizar();
+					
+					System.out.print("Realizar nova avaliação? (S/N)\n");
+					
+					if(menu.nextLine().toUpperCase().contains("S"))
+						continue;
+					else
+						break;
+					
+				}else {	
+					System.out.print("Avaliação cancelada.\n");
+					break;
 				}
-				else {
-					AbrirMenu();
-				}
-				
-			}else {	
-				System.out.print("Avaliação cancelada.\n");
-				AbrirMenu();
-			}	
-			
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao realizar avaliação. Retorno: " + e.getMessage());
 		}	
 	}
 
-	private Aluno AdicionaNotasBoletim(Aluno aluno) {
-		
-		Scanner menu = new Scanner (System.in);
+	private Aluno AdicionaNotasBoletim(Aluno aluno, Scanner menu) {
+
 		String valorDigitado = null;
 		
 		try {
@@ -452,26 +456,26 @@ public class MenuAluno {
 				
 				System.out.print("\nDisciplina: " + disciplina.getNome());
 				
-				while (!isNumber(valorDigitado)) {				
+				while (!isDouble(valorDigitado)) {				
 					System.out.print("\nNota 1: ");			
 					valorDigitado = menu.nextLine();
 					
-					if(!isNumber(valorDigitado))
+					if(!isDouble(valorDigitado))
 						System.out.print("Valor inválido.\n");
 				}
 				
-				disciplina.setNota1(Integer.parseInt(valorDigitado));				
+				disciplina.setNota1(Double.parseDouble(valorDigitado));				
 				valorDigitado = null;
 				
-				while (!isNumber(valorDigitado)) {				
+				while (!isDouble(valorDigitado)) {				
 					System.out.print("\nNota 2: ");			
 					valorDigitado = menu.nextLine();
 					
-					if(!isNumber(valorDigitado))
+					if(!isDouble(valorDigitado))
 						System.out.print("Valor inválido.\n");
 				}
 				
-				disciplina.setNota2(Integer.parseInt(valorDigitado));				
+				disciplina.setNota2(Double.parseDouble(valorDigitado));				
 				valorDigitado= null;	
 				
 				disciplina.CalculaMedia();
@@ -482,16 +486,14 @@ public class MenuAluno {
 			aluno.setBoletim(boletim);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao adicionar notas ao Boletim. Retorno: " + e.getMessage());
 		}
 		
 		return aluno;
 	}
 	
-	private Aluno AdicionaNotasFrequencia(Aluno aluno) {
-		
-		Scanner menu = new Scanner (System.in);
+	private Aluno AdicionaFrequencia(Aluno aluno, Scanner menu) {
+
 		String valorDigitado = null;
 		
 		try {
@@ -506,11 +508,11 @@ public class MenuAluno {
 				
 				System.out.print("\nDisciplina: " + disciplina.getNome());
 				
-				while (!isNumber(valorDigitado)) {				
-					System.out.print("\nFrequência: ");			
+				while (!isInt(valorDigitado)) {				
+					System.out.print("\nFrequência(h): ");			
 					valorDigitado = menu.nextLine();
 					
-					if(!isNumber(valorDigitado))
+					if(!isInt(valorDigitado))
 						System.out.print("Valor inválido.\n");
 				}
 				
@@ -522,20 +524,27 @@ public class MenuAluno {
 			aluno.setBoletim(boletim);			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao adicionar frequência no Boletim. Retorno: " + e.getMessage());
 		}
 		
 		return aluno;
 	}	
 
-	private Aluno ObtemAlunoSelecionado() {
-		
-		Scanner menu = new Scanner (System.in);			
+	private Aluno ObtemAlunoSelecionado(Scanner menu) {
+
 		String valorDigitado = null;		
 		var listaAlunos = new Aluno().Buscar();
+		int numeroElementos = listaAlunos.size();
 		
 		try {
+			
+			if(numeroElementos == 0) {
+				System.out.print("Nenhuma aluno disponívies.\n"
+							   + "Realizar o cadastro através do menu Cadastrar.\n"
+							   + "Digite 'OK' para continuar.\n");
+				menu.nextLine();
+				return null;
+			}
 			
 			System.out.print("\nLista de alunos:\n\n");
 			
@@ -546,26 +555,38 @@ public class MenuAluno {
 				System.out.print("Opção: " + indiceLista + " - Nome: " + ((Aluno)alunoBD).getNome() + "\n");
 			}
 			
+			System.out.print("Opção: " + numeroElementos + " - Retornar\n");
+			
 			while(!isValidIndex(valorDigitado, listaAlunos)) {
 				System.out.print("\nEscolha uma opção :\n");
 				
 				valorDigitado = menu.nextLine();
 				
+				if(valorDigitado.contains(String.valueOf(numeroElementos)))
+					return null;
+				
 				if(!isValidIndex(valorDigitado, listaAlunos))
 					System.out.print("Opção inválida.\n");
 			}	
-			
 			} catch (Exception e) {
-				e.printStackTrace();
-				menu.close();
+				System.out.print("Falha ao obter aluno da lista. Retorno: " + e.getMessage());
 			}
 		
 		return (Aluno)(listaAlunos.get(Integer.parseInt(valorDigitado)));
 	}	
 	
-	public static boolean isNumber(String text) {
+	public static boolean isDouble(String text) {
 	    try {
 	        Double.parseDouble(text);
+	        return true;
+	    } catch (Exception e) {
+	        return false;
+	    }
+	}
+	
+	public static boolean isInt(String text) {
+	    try {
+	        Integer.parseInt(text);
 	        return true;
 	    } catch (Exception e) {
 	        return false;

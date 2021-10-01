@@ -2,9 +2,7 @@ import java.util.Scanner;
 
 public class MenuProfessor {
 	
-public void AbrirMenu() {
-		
-	Scanner menu = new Scanner (System.in);
+public void AbrirMenu(Scanner menu) {
 	
 	try {	
 	

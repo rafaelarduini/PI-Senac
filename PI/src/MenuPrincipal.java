@@ -24,15 +24,15 @@ public class MenuPrincipal {
 		        switch (opcao) {
 		        
 		        case "1":
-		            new MenuDisciplina().AbrirMenu();
+		            new MenuDisciplina().AbrirMenu(menu);
 		            break;
 		            
 		        case "2":
-		            new MenuAluno().AbrirMenu();
+		            new MenuAluno().AbrirMenu(menu);
 		            break;
 		
 		        case "3":
-		        	new MenuProfessor().AbrirMenu();
+		        	new MenuProfessor().AbrirMenu(menu);
 		            break;
 		            
 		        case "4":
@@ -40,7 +40,8 @@ public class MenuPrincipal {
 		            break;
 		
 		        case "5":
-		        	System.out.print("\nAté logo!");		        	
+		        	System.out.print("\nAté logo!");
+		        	menu.close();
 		            return;   
 		
 		        default:

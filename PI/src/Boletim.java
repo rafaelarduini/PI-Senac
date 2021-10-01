@@ -33,7 +33,6 @@ public class Boletim {
 		String listaDisciplinas = "";
 		
 		for (Disciplina disciplina :Disciplinas) {			
-			//listaDisciplinas += "Nome: " + disciplina.getNome() + " - Carga horária: " + disciplina.getCargaHoraria() + "\n";
 			listaDisciplinas += disciplina.toString();
 		}
 		
