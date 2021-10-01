@@ -32,7 +32,7 @@ public class MenuPrincipal {
 		            break;
 		
 		        case "3":
-		        	//new MenuProfessor().AbrirMenu();
+		        	new MenuProfessor().AbrirMenu();
 		            break;
 		            
 		        case "4":

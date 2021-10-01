@@ -17,7 +17,7 @@ public class MenuAluno {
 		        System.out.print("Opção 2 - Atualizar \n");
 		        System.out.print("Opção 3 - Excluir \n");
 		        System.out.print("Opção 4 - Avaliar \n");
-		        System.out.print("Opção 6 - Retornar \n\n");
+		        System.out.print("Opção 5 - Retornar \n\n");
 		        System.out.print("Digite uma opção: ");
 		
 		        String opcao = menu.nextLine();

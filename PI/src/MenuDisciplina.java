@@ -169,7 +169,7 @@ public class MenuDisciplina {
 			
 			for (Object disciplinaBD : listaDisciplinas) {
 				
-				int indiceLista = listaDisciplinas.indexOf(disciplinaBD) == -1 ? 0 : listaDisciplinas.indexOf(disciplinaBD);
+				int indiceLista = listaDisciplinas.indexOf(disciplinaBD);
 				
 				System.out.print("Opção: " + indiceLista + " - Nome: " + ((Disciplina)disciplinaBD).getNome() + "\n");
 			}
