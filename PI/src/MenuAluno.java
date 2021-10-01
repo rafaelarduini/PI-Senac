@@ -24,19 +24,19 @@ public class MenuAluno {
 		        switch (opcao) {
 		        
 		        case "1":	        	
-		        	Cadastrar();		        	
+		        	Cadastrar(menu);		        	
 		            break;
 		
 		        case "2":
-		        	Atualizar();
+		        	Atualizar(menu);
 		            break;
 		
 		        case "3":
-		        	Excluir();
+		        	Excluir(menu);
 		            break;		            
 		            
 		        case "4":
-		        	Avaliar();
+		        	Avaliar(menu);
 		            
 		        case "5":		        	
 		        	return;
@@ -51,9 +51,7 @@ public class MenuAluno {
 		}			
 	}	
 	
-	private void Cadastrar() {
-		
-		Scanner menu = new Scanner (System.in);
+	private void Cadastrar(Scanner menu) {
 		
 		try {
 			
@@ -178,9 +176,7 @@ public class MenuAluno {
 		return novoEndereco;
 	}
 	
-	private void Atualizar() {
-		
-		Scanner menu = new Scanner (System.in);
+	private void Atualizar(Scanner menu) {
 		
 		try {
 			
@@ -337,9 +333,7 @@ public class MenuAluno {
 		return (Disciplina)(listaDisciplinas.get(Integer.parseInt(valorDigitado)));
 	}
 	
-	private void Excluir() {
-		
-		Scanner menu = new Scanner (System.in);
+	private void Excluir(Scanner menu) {
 		
 		try {
 			
@@ -376,9 +370,7 @@ public class MenuAluno {
 		}	
 	}
 	
-	private void Avaliar() {
-		
-		Scanner menu = new Scanner (System.in);
+	private void Avaliar(Scanner menu) {
 		
 		try {
 			
