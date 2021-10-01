@@ -36,7 +36,7 @@ public class MenuPrincipal {
 		            break;
 		            
 		        case "4":
-		        	//new MenuFornecedor().AbrirMenu();
+		        	new MenuFornecedor().AbrirMenu(menu);
 		            break;
 		
 		        case "5":

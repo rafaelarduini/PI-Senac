@@ -19,19 +19,19 @@ public void AbrirMenu(Scanner menu) {
 	
 	        switch (opcao) {
 	        case "1":	        	
-	        	//Cadastrar();		        	
+	        	//TODO:Cadastrar();		        	
 	            break;
 	
 	        case "2":
-	        	//Atualizar();
+	        	//TODO:Atualizar();
 	            break;
 	
 	        case "3":
-	        	//Excluir();
+	        	//TODO:Excluir();
 	            break;		            
 	            
 	        case "4":
-	        	//CalculaSalario();
+	        	//TODO:CalculaSalario();
 	            
 	        case "5":
 	        	return;
@@ -42,8 +42,7 @@ public void AbrirMenu(Scanner menu) {
 	        }
 		}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao abrir menu Professor. Retorno: " + e.getMessage());
 		}			
 	}	
 }

@@ -2,9 +2,7 @@ import java.util.Scanner;
 
 public class MenuFornecedor {
 	
-public void AbrirMenu() {
-		
-	Scanner menu = new Scanner (System.in);
+public void AbrirMenu(Scanner menu) {
 	
 	try {	
 	
@@ -20,15 +18,15 @@ public void AbrirMenu() {
 	
 	        switch (opcao) {
 	        case "1":	        	
-	        	//Cadastrar();		        	
+	        	//TODO:Cadastrar();		        	
 	            break;
 	
 	        case "2":
-	        	//Atualizar();
+	        	//TODO:Atualizar();
 	            break;
 	
 	        case "3":
-	        	//Excluir();
+	        	//TODO:Excluir();
 	            break;
 	            
 	        case "4":
@@ -40,8 +38,7 @@ public void AbrirMenu() {
 	        }
 		}
 		} catch (Exception e) {
-			e.printStackTrace();
-			menu.close();
+			System.out.print("Falha ao abrir menu Fornecedor. Retorno: " + e.getMessage());
 		}			
 	}	
 }
