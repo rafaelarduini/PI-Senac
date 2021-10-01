@@ -81,7 +81,6 @@ public class Professor extends PessoaFisica{
 		}
 	}
 	
-	@Override
 	public List<Object> Buscar() {
 		
 		List<Object> listaBD = new ArrayList<Object>();

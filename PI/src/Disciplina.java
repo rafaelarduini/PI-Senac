@@ -53,7 +53,6 @@ public class Disciplina implements Base{
 		CargaHoraria = cargaHoraria;
 	}	
 
-	@Override
 	public List<Object> Buscar() {
 		
 		List<Object> listaBD = new ArrayList<Object>();

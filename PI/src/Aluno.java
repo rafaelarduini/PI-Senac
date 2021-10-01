@@ -73,7 +73,6 @@ public class Aluno extends PessoaFisica {
 		Aprovado = percentualFrequencia > percentualMinimoFrequencia && notaFinal > notaMinima;
 	}	
 	
-	@Override
 	public List<Object> Buscar() {
 		
 		List<Object> listaBD = new ArrayList<Object>();

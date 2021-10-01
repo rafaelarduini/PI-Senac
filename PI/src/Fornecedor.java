@@ -40,7 +40,6 @@ public class Fornecedor extends PessoaJuridica{
 		Descricao = descricao;
 	}
 
-	@Override
 	public List<Object> Buscar() {
 		
 		List<Object> listaBD = new ArrayList<Object>();
