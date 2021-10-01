@@ -68,7 +68,7 @@ public class DisciplinaCursada extends Disciplina{
 	
 	@Override
 	public String toString() {
-		return String.format("%s\nNota 1: %s\nNota 2: %s\nMédia: %s\nFrequência: %s\n\n",
+		return String.format("%s\nNota 1: %s\nNota 2: %s\nMédia: %s\nFrequência: %sh\n\n",
 				super.toString(), this.Nota1, this.Nota2, this.Media, this.Frequencia);
 	}
 	

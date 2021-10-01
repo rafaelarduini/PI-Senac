@@ -10,6 +10,7 @@ public class MenuAluno {
 		try {	
 		
 			while (true) {
+				
 				System.out.print("\nMenu Aluno\n\n");
 		        System.out.print("Opção 1 - Cadastrar \n");
 		        System.out.print("Opção 2 - Atualizar \n");
@@ -21,6 +22,7 @@ public class MenuAluno {
 		        String opcao = menu.nextLine();
 		
 		        switch (opcao) {
+		        
 		        case "1":	        	
 		        	Cadastrar();		        	
 		            break;
@@ -61,12 +63,12 @@ public class MenuAluno {
 				
 				novoAluno = ObtemDadosAluno(novoAluno, menu);
 				
-				System.out.print("Cadastrar endereço? (S/N)\n");			
+				System.out.print("\nCadastrar endereço? (S/N) ");			
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					novoAluno.setEndereco(ObtemDadosEndereco(menu));
 				}
 				
-				System.out.print("Cadastrar boletim? (S/N)\n");			
+				System.out.print("\nCadastrar boletim? (S/N) ");			
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					novoAluno.setBoletim(ObtemDadosBoletim(menu));
 				}
@@ -75,12 +77,12 @@ public class MenuAluno {
 						
 				System.out.print(novoAluno);
 				
-				System.out.print("Confirmar cadastro? (S/N)\n");
+				System.out.print("Confirmar cadastro? (S/N) ");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					novoAluno.Adicionar();
 					
-					System.out.print("Realizar novo cadastro? (S/N)\n");
+					System.out.print("Realizar novo cadastro? (S/N) ");
 					
 					if(menu.nextLine().toUpperCase().contains("S"))
 						continue;
@@ -102,6 +104,7 @@ public class MenuAluno {
 		String valorDigitado = null;
 		
 		try {			
+			System.out.print("\nDados do Aluno\n");
 			
 			System.out.print("Informe o nome:\n");		
 			aluno.setNome( menu.nextLine());
@@ -224,12 +227,12 @@ public class MenuAluno {
 		        
 		        System.out.print(alunoSelecionado);
 		        
-		        System.out.print("\n\nConfirmar atualização? (S/N)\n");
+		        System.out.print("\n\nConfirmar atualização? (S/N) ");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					alunoSelecionado.Atualizar();
 					
-					System.out.print("Realizar nova atualização? (S/N)\n");
+					System.out.print("Realizar nova atualização? (S/N) ");
 					
 					if(menu.nextLine().toUpperCase().contains("S"))
 						continue;
@@ -252,7 +255,7 @@ public class MenuAluno {
 				
 		try {		
 			
-			System.out.print("\nSelecionar disciplinas do novo boletim\n\n");
+			System.out.print("\nSelecionar disciplinas do novo boletim\n");
 			
 			while (true) {
 				
@@ -264,14 +267,14 @@ public class MenuAluno {
 				
 				var novaDisciplinaCursada = new DisciplinaCursada(disciplinaSelecionada);
 				
-				System.out.print(disciplinaSelecionada);
+				System.out.print("\n\n" + disciplinaSelecionada);
 				
-				System.out.print("\n\nAdicionar? (S/N)\n");
+				System.out.print("\n\nAdicionar? (S/N) ");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					novoBoletim.addDisciplinaCursada(novaDisciplinaCursada);
 					
-					System.out.print("Adicionar nova disciplina? (S/N)\n");
+					System.out.print("Adicionar nova disciplina? (S/N) ");
 					
 					if(!menu.nextLine().toUpperCase().contains("S"))
 						break;
@@ -303,7 +306,7 @@ public class MenuAluno {
 				return null;
 			}
 			
-			System.out.print("Lista de disciplinas disponívies:\n");
+			System.out.print("\nLista de disciplinas disponívies:\n\n");
 			
 			for (Object disciplinaBD : listaDisciplinas) {
 				
@@ -315,7 +318,7 @@ public class MenuAluno {
 			System.out.print("Opção: " + numeroElementos + " - Retornar\n");
 			
 			while(!isValidIndex(valorDigitado, listaDisciplinas)) {
-				System.out.print("\nEscolha uma opção :\n");
+				System.out.print("\nEscolha uma opção: ");
 				
 				valorDigitado = menu.nextLine();
 				
@@ -351,12 +354,12 @@ public class MenuAluno {
 				
 				System.out.print(alunoSelecionado);
 		        
-		        System.out.print("\n\nConfirmar exclusão? (S/N)\n");
+		        System.out.print("Confirmar exclusão? (S/N) ");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					alunoSelecionado.Remover();
 					
-					System.out.print("Realizar nova exclusão? (S/N)\n");
+					System.out.print("Realizar nova exclusão? (S/N) ");
 					
 					if(menu.nextLine().toUpperCase().toUpperCase().contains("S"))
 						continue;					
@@ -400,12 +403,12 @@ public class MenuAluno {
 				
 				System.out.print(alunoSelecionado.getBoletim());
 
-				System.out.print("Inserir notas? (S/N)\n");			
+				System.out.print("Inserir notas? (S/N) ");			
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					alunoSelecionado = AdicionaNotasBoletim(alunoSelecionado, menu);  
 				}
 				
-				System.out.print("Inserir frequência? (S/N)\n");			
+				System.out.print("Inserir frequência? (S/N) ");			
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					alunoSelecionado = AdicionaFrequencia(alunoSelecionado, menu);
 				}			
@@ -420,12 +423,12 @@ public class MenuAluno {
 					System.out.print("Aluno reprovado!");
 				}	
 		        
-		        System.out.print("\n\nConfirmar alterações? (S/N)\n");
+		        System.out.print("\n\nConfirmar alterações? (S/N) ");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					alunoSelecionado.Atualizar();
 					
-					System.out.print("Realizar nova avaliação? (S/N)\n");
+					System.out.print("Realizar nova avaliação? (S/N) ");
 					
 					if(menu.nextLine().toUpperCase().contains("S"))
 						continue;
@@ -506,7 +509,8 @@ public class MenuAluno {
 			
 			for (DisciplinaCursada disciplina : disciplinas) {
 				
-				System.out.print("\nDisciplina: " + disciplina.getNome());
+				System.out.print("\nDisciplina: " + disciplina.getNome()
+								+"\nCarga horária: " + disciplina.getCargaHoraria() + " h");
 				
 				while (!isInt(valorDigitado)) {				
 					System.out.print("\nFrequência(h): ");			
@@ -558,7 +562,7 @@ public class MenuAluno {
 			System.out.print("Opção: " + numeroElementos + " - Retornar\n");
 			
 			while(!isValidIndex(valorDigitado, listaAlunos)) {
-				System.out.print("\nEscolha uma opção :\n");
+				System.out.print("\nEscolha uma opção: ");
 				
 				valorDigitado = menu.nextLine();
 				

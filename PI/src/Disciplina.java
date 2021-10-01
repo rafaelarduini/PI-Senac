@@ -180,7 +180,7 @@ public class Disciplina implements Base{
 	
 	@Override
 	public String toString() {
-		return String.format("Disciplina: %s\nCarga horária: %s h",
+		return String.format("Disciplina: %s\nCarga horária: %sh",
         		this.Nome, this.CargaHoraria);
 	}
 }

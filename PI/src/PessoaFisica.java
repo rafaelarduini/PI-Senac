@@ -45,7 +45,7 @@ public abstract class PessoaFisica extends Pessoa  {
 	public String toString() {		
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
 		
-		return String.format("%s\n\nCPF:%s\nData de Nascimento:%s\n",
+		return String.format("%s\n\nCPF: %s\nData de Nascimento: %s\n",
         		super.toString(), this.CPF, formato.format(this.DataNascimento));
 	}
 }

@@ -11,7 +11,7 @@ public class MenuPrincipal {
 	
 	        while (true) {            
 	
-		        System.out.print("\nMenu Principal: \n\n");
+		        System.out.print("\nMenu Principal\n\n");
 		        System.out.print("Opção 1 - Disciplina \n");
 		        System.out.print("Opção 2 - Aluno \n");
 		        System.out.print("Opção 3 - Professor \n");

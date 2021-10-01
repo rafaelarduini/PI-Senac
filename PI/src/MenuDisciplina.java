@@ -59,12 +59,12 @@ public class MenuDisciplina {
 						
 				System.out.print(novaDisciplina);
 				
-				System.out.print("\n\nConfirmar cadastro? (S/N)\n");
+				System.out.print("\n\nConfirmar cadastro? (S/N) ");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					novaDisciplina.Adicionar();
 					
-					System.out.print("Realizar novo cadastro? (S/N)\n");
+					System.out.print("Realizar novo cadastro? (S/N) ");
 					
 					if(menu.nextLine().toUpperCase().contains("S"))
 						continue;					
@@ -124,12 +124,12 @@ public class MenuDisciplina {
 		         
 		        System.out.print(disciplinaSelecionada);
 		        
-		        System.out.print("\n\nConfirmar atualização? (S/N)\n");
+		        System.out.print("\n\nConfirmar atualização? (S/N) ");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					disciplinaSelecionada.Atualizar();
 					
-					System.out.print("Realizar nova atualização? (S/N)\n");
+					System.out.print("Realizar nova atualização? (S/N) ");
 					
 					if(menu.nextLine().toUpperCase().contains("S"))
 						continue;					
@@ -162,7 +162,7 @@ public class MenuDisciplina {
 				return null;
 			}
 			
-			System.out.print("Lista de disciplinas disponívies:\n");
+			System.out.print("\nLista de disciplinas disponívies:\n\n");
 			
 			for (Object disciplinaBD : listaDisciplinas) {
 				
@@ -174,7 +174,7 @@ public class MenuDisciplina {
 			System.out.print("Opção: " + numeroElementos + " - Retornar\n");
 			
 			while(!isValidIndex(valorDigitado, listaDisciplinas)) {
-				System.out.print("\nEscolha uma opção :\n");
+				System.out.print("\nEscolha uma opção: ");
 				
 				valorDigitado = menu.nextLine();
 				
@@ -206,14 +206,14 @@ public class MenuDisciplina {
 					break;
 				}
 				
-				System.out.print(disciplinaSelecionada);
+				System.out.print("\n" + disciplinaSelecionada);
 		        
-		        System.out.print("\n\nConfirmar exclusão? (S/N)\n");
+		        System.out.print("\n\nConfirmar exclusão? (S/N) ");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					disciplinaSelecionada.Remover();
 					
-					System.out.print("Realizar nova exclusão? (S/N)\n");
+					System.out.print("Realizar nova exclusão? (S/N) ");
 					
 					if(menu.nextLine().toUpperCase().contains("S"))
 						continue;					

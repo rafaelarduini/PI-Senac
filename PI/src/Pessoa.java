@@ -64,7 +64,7 @@ public abstract class Pessoa implements Base {
 	
 	@Override
 	public String toString() {
-		return String.format("Nome:%s\nEmail:%s\nTelefone:%s\n\nEndereço\n%s",
+		return String.format("Nome: %s\nEmail: %s\nTelefone: %s\n\nEndereço\n%s",
         		this.Nome, this.Email,this.Telefone, this.Endereco);
 	}
 }
