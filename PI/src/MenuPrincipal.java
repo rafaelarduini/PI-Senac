@@ -17,7 +17,7 @@ public class MenuPrincipal {
 		        System.out.print("Opção 3 - Professor \n");
 		        System.out.print("Opção 4 - Fornecedor \n");
 		        System.out.print("Opção 5 - Sair \n\n");
-		        System.out.print("Digite uma opção: \n");
+		        System.out.print("Digite uma opção: ");
 		
 		        String opcao = menu.nextLine();		
 		
@@ -50,7 +50,7 @@ public class MenuPrincipal {
 		        }
 	        }        
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.print("Falha ao abrir o menu Principal. Retorno: " + e.getMessage());
 			menu.close();
 		}
 	}		

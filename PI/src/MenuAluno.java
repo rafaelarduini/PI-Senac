@@ -408,7 +408,7 @@ public class MenuAluno {
 					alunoSelecionado = AdicionaNotasBoletim(alunoSelecionado, menu);  
 				}
 				
-				System.out.print("Inserir frequência? (S/N) ");			
+				System.out.print("\nInserir frequência? (S/N) ");			
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					alunoSelecionado = AdicionaFrequencia(alunoSelecionado, menu);
 				}			
@@ -448,6 +448,7 @@ public class MenuAluno {
 	private Aluno AdicionaNotasBoletim(Aluno aluno, Scanner menu) {
 
 		String valorDigitado = null;
+		Boolean valido = false;
 		
 		try {
 			
@@ -457,29 +458,34 @@ public class MenuAluno {
 			
 			for (DisciplinaCursada disciplina : disciplinas) {
 				
-				System.out.print("\nDisciplina: " + disciplina.getNome());
+				System.out.print("\nDisciplina: " + disciplina.getNome() + "\n");
 				
-				while (!isDouble(valorDigitado)) {				
-					System.out.print("\nNota 1: ");			
+				while (!valido) {				
+					System.out.print("Nota 1: ");			
 					valorDigitado = menu.nextLine();
 					
-					if(!isDouble(valorDigitado))
+					valido = VerificaSeValorDaNotaEhValido(valorDigitado);
+					
+					if(!valido)
 						System.out.print("Valor inválido.\n");
 				}
 				
-				disciplina.setNota1(Double.parseDouble(valorDigitado));				
-				valorDigitado = null;
+				disciplina.setNota1(Double.parseDouble(valorDigitado));
+				valido = false;
 				
-				while (!isDouble(valorDigitado)) {				
-					System.out.print("\nNota 2: ");			
+				while (!valido) {
+					
+					System.out.print("Nota 2: ");			
 					valorDigitado = menu.nextLine();
 					
-					if(!isDouble(valorDigitado))
+					valido = VerificaSeValorDaNotaEhValido(valorDigitado);
+					
+					if(!valido)
 						System.out.print("Valor inválido.\n");
 				}
 				
-				disciplina.setNota2(Double.parseDouble(valorDigitado));				
-				valorDigitado= null;	
+				disciplina.setNota2(Double.parseDouble(valorDigitado));	
+				valido = false;
 				
 				disciplina.CalculaMedia();
 				
@@ -494,10 +500,15 @@ public class MenuAluno {
 		
 		return aluno;
 	}
+
+	private Boolean VerificaSeValorDaNotaEhValido(String valorDigitado) {		
+		return isDouble(valorDigitado) && Double.parseDouble(valorDigitado) >= 0 && Double.parseDouble(valorDigitado) <= 10;		
+	}
 	
 	private Aluno AdicionaFrequencia(Aluno aluno, Scanner menu) {
 
 		String valorDigitado = null;
+		Boolean valido = false;
 		
 		try {
 			
@@ -510,18 +521,20 @@ public class MenuAluno {
 			for (DisciplinaCursada disciplina : disciplinas) {
 				
 				System.out.print("\nDisciplina: " + disciplina.getNome()
-								+"\nCarga horária: " + disciplina.getCargaHoraria() + " h");
+								+"\nCarga horária: " + disciplina.getCargaHoraria() + " h\n");
 				
-				while (!isInt(valorDigitado)) {				
-					System.out.print("\nFrequência(h): ");			
+				while (!valido) {				
+					System.out.print("Frequência(h): ");			
 					valorDigitado = menu.nextLine();
 					
-					if(!isInt(valorDigitado))
+					valido = VerificaSeValorDaFequenciaEhValido(valorDigitado, disciplina);
+					
+					if(!valido)
 						System.out.print("Valor inválido.\n");
 				}
 				
 				disciplina.setFrequencia(Integer.parseInt(valorDigitado));
-				valorDigitado = null;				
+				valido = false;
 			}
 			
 			boletim.setDisciplinas(disciplinas);			
@@ -533,6 +546,10 @@ public class MenuAluno {
 		
 		return aluno;
 	}	
+
+	private Boolean VerificaSeValorDaFequenciaEhValido(String valorDigitado, DisciplinaCursada disciplina) {
+		return isInt(valorDigitado) && Integer.parseInt(valorDigitado) >= 0 && Integer.parseInt(valorDigitado) <= disciplina.getCargaHoraria();
+	}
 
 	private Aluno ObtemAlunoSelecionado(Scanner menu) {
 
