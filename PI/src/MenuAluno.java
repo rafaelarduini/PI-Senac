@@ -472,7 +472,9 @@ public class MenuAluno {
 				}
 				
 				disciplina.setNota2(Integer.parseInt(valorDigitado));				
-				valorDigitado= null;				
+				valorDigitado= null;	
+				
+				disciplina.CalculaMedia();
 				
 			}
 			
