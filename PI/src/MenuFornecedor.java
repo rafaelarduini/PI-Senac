@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuFornecedor {
@@ -171,11 +172,105 @@ public class MenuFornecedor {
 		
 		
 		private void Excluir(Scanner menu) {
-		// TODO Auto-generated method stub
+			
+			try {
+				
+				while(true) {
+					
+					Fornecedor fornecedorSelecionado = ObtemFornecedorSelecionado(menu);
+					
+					if(fornecedorSelecionado == null) {
+						System.out.print("Exclus�o cancelada.\n");
+						break;
+					}
+					
+					System.out.print(fornecedorSelecionado);
+			        
+			        System.out.print("Confirmar exclus�o? (S/N) ");
+					
+					if(menu.nextLine().toUpperCase().contains("S")) {
+						fornecedorSelecionado.Remover();
+						
+						System.out.print("Realizar nova exclus�o? (S/N) ");
+						
+						if(menu.nextLine().toUpperCase().toUpperCase().contains("S"))
+							continue;					
+						else
+							break;
+						
+					}else {	
+						System.out.print("Atualiza��o cancelada.\n");
+						break;
+					}	
+				}
+			} catch (Exception exception) {
+				System.out.print("Falha ao excluir fornecedor. Retorno: " + exception.getMessage());
+			}	
 		
 		}
 
 		
+		private Fornecedor ObtemFornecedorSelecionado(Scanner menu) {
+			
+			String valorDigitado = null;	
+			
+			var listaFornecedores = new Fornecedor().Buscar();
+			int numeroElementos = listaFornecedores.size();
+			
+			try {
+				
+				if(numeroElementos == 0) {
+					System.out.print("Nenhum fornecedor disponível.\n"
+								   + "Realizar o cadastro através do menu Cadastrar.\n"
+								   + "Digite 'OK' para continuar.\n");
+					menu.nextLine();
+					return null;
+				}
+				
+				System.out.print("\nLista de fornecedores cadastrados:\n\n");
+				
+				for (Object fornecedorBD : listaFornecedores) {
+					
+					int indiceLista = listaFornecedores.indexOf(fornecedorBD);
+					
+					System.out.print("Opção: " + indiceLista + " - Nome: " + ((Fornecedor)fornecedorBD).getNome() + "\n");
+				}
+				
+				System.out.print("Opção: " + numeroElementos + " - Retornar\n");
+				
+				while(!isValidIndex(valorDigitado, listaFornecedores)) {
+					System.out.print("\nEscolha uma op��o: ");
+					
+					valorDigitado = menu.nextLine();
+					
+					if(valorDigitado.contains(String.valueOf(numeroElementos)))
+						return null;
+					
+					if(!isValidIndex(valorDigitado, listaFornecedores))
+						System.out.print("Opção inválida.\n");
+				}	
+				} catch (Exception e) {
+					System.out.print("Falha ao obter aluno da lista. Retorno: " + e.getMessage());
+				}
+			
+			return (Fornecedor)(listaFornecedores.get(Integer.parseInt(valorDigitado)));
+				
+		}
+		
+		
+
+		private boolean isValidIndex(String text, List<Object> lista) {
+			
+			    try {
+			    	int inteiro = Integer.parseInt(text);
+			    	lista.get(inteiro);
+			        return true;
+			    } catch (Exception e) {
+			        return false;
+			    }
+			
+		}
+
 		public static boolean isInt(String text) {
 		    try {
 		        Integer.parseInt(text);
@@ -185,15 +280,7 @@ public class MenuFornecedor {
 		    }
 		}
 		
-		public static boolean isDate(String text) {
-		    try {
-		    	SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy");
-		    	parser.parse(text);
-		        return true;
-		    } catch (Exception e) {
-		        return false;
-		    }
-		}
+
 
 
 
