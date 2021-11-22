@@ -11,11 +11,11 @@ public void AbrirMenu(Scanner menu) {
 	
 		while (true) {
 			System.out.print("\nMenu Professor\n\n");
-	        System.out.print("Opï¿½ï¿½o 1 - Cadastrar \n");
-	        System.out.print("Opï¿½ï¿½o 2 - Atualizar \n");
-	        System.out.print("Opï¿½ï¿½o 3 - Excluir \n");
-	        System.out.print("Opï¿½ï¿½o 4 - Retornar \n\n");
-	        System.out.print("Digite uma opï¿½ï¿½o: ");
+	        System.out.print("Opção 1 - Cadastrar \n");
+	        System.out.print("Opção 2 - Atualizar \n");
+	        System.out.print("Opção 3 - Excluir \n");
+	        System.out.print("Opção 4 - Retornar \n\n");
+	        System.out.print("Digite uma Opção: ");
 	
 	        String opcao = menu.nextLine();
 	
@@ -36,7 +36,7 @@ public void AbrirMenu(Scanner menu) {
 	        	return;
 	            
 	        default:
-	            System.out.print("\nOpï¿½ï¿½o Invï¿½lida!\n");
+	            System.out.print("\nOpção inválida!\n");
 	            break;		            
 	        }
 		}
@@ -55,7 +55,7 @@ public void AbrirMenu(Scanner menu) {
 				
 				novoProfessor = ObtemDadosProfessor(novoProfessor, menu);
 				
-				System.out.print("\nCadastrar endereÃ§o? (S/N) ");			
+				System.out.print("\nCadastrar endereço? (S/N) ");			
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					novoProfessor.setEndereco(ObtemDadosEndereco(menu));
 				}
@@ -115,7 +115,7 @@ public void AbrirMenu(Scanner menu) {
 				valorDigitado = menu.nextLine();
 				
 				if(!isDate(valorDigitado))
-					System.out.print("Valor invï¿½lido.\n");
+					System.out.print("Valor inválido.\n");
 			}
 			
 			professor.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(valorDigitado));
@@ -151,7 +151,7 @@ public void AbrirMenu(Scanner menu) {
 				valorDigitado = menu.nextLine();
 				
 				if(!isInt(valorDigitado))
-					System.out.print("Valor invï¿½lido.\n");
+					System.out.print("Valor inválido.\n");
 			}
 	
 			novoEndereco.setNumero(Integer.parseInt(valorDigitado));
@@ -173,7 +173,7 @@ public void AbrirMenu(Scanner menu) {
 			novoEndereco.setEstado(menu.nextLine());
 			
 		} catch (Exception e) {
-			System.out.print("Falha ao obter dados de Endereï¿½o. Retorno: " + e.getMessage());
+			System.out.print("Falha ao obter dados de Endereço. Retorno: " + e.getMessage());
 		}	
 		return novoEndereco;
 	}
@@ -187,18 +187,18 @@ public void AbrirMenu(Scanner menu) {
 				Professor professorSelecionado = ObtemProfessorSelecionado(menu);
 				
 				if(professorSelecionado == null) {
-					System.out.print("Atualizaï¿½ï¿½o cancelada.\n");
+					System.out.print("atualização cancelada.\n");
 					break;
 				}
 				
 				System.out.print("Professor selecionado: " + professorSelecionado.getNome());
 				
 				System.out.print("\n\nAtualizar:\n");
-		        System.out.print("Opï¿½ï¿½o 1 - Dados do Professor \n");
-		        System.out.print("Opï¿½ï¿½o 2 - Endereï¿½o do professor\n");
-		        System.out.print("Opï¿½ï¿½o 3 - Disciplinas do professor\n");
-		        System.out.print("Opï¿½ï¿½o 4 - Retornar \n\n");
-		        System.out.print("Digite uma opï¿½ï¿½o: ");
+		        System.out.print("Opção 1 - Dados do Professor \n");
+		        System.out.print("Opção 2 - Endereço do professor\n");
+		        System.out.print("Opção 3 - Disciplinas do professor\n");
+		        System.out.print("Opção 4 - Retornar \n\n");
+		        System.out.print("Digite uma Opção: ");
 		
 		        String opcao = menu.nextLine();
 		
@@ -219,18 +219,18 @@ public void AbrirMenu(Scanner menu) {
 		        	return;
 		
 		        default:
-		            System.out.print("\nOpï¿½ï¿½o Invï¿½lida!\n");
+		            System.out.print("\nOpção inválida!\n");
 		            break;	            
 		        }
 		        
 		        System.out.print(professorSelecionado );
 		        
-		        System.out.print("\n\nConfirmar atualizaï¿½ï¿½o? (S/N) ");
+		        System.out.print("\n\nConfirmar atualização? (S/N) ");
 				
 				if(menu.nextLine().toUpperCase().contains("S")) {
 					professorSelecionado .Atualizar();
 					
-					System.out.print("Realizar nova atualizaï¿½ï¿½o? (S/N) ");
+					System.out.print("Realizar nova atualização? (S/N) ");
 					
 					if(menu.nextLine().toUpperCase().contains("S"))
 						continue;
@@ -238,7 +238,7 @@ public void AbrirMenu(Scanner menu) {
 						break;
 					
 				}else {	
-					System.out.print("Atualizaï¿½ï¿½o cancelada.\n");
+					System.out.print("atualização cancelada.\n");
 					break;
 				}	
 			}
@@ -256,7 +256,7 @@ public void AbrirMenu(Scanner menu) {
 		try {
 			
 			if(numeroElementos == 0) {
-				System.out.print("Nenhuma professor disponï¿½vies.\n"
+				System.out.print("Nenhuma professor disponíveis.\n"
 							   + "Realizar o cadastro atravï¿½s do menu Cadastrar.\n"
 							   + "Digite 'OK' para continuar.\n");
 				menu.nextLine();
@@ -269,13 +269,13 @@ public void AbrirMenu(Scanner menu) {
 				
 				int indiceLista = listaProfessores.indexOf(professorDB);
 				
-				System.out.print("Opï¿½ï¿½o: " + indiceLista + " - Nome: " + ((Professor)professorDB).getNome() + "\n");
+				System.out.print("Opção: " + indiceLista + " - Nome: " + ((Professor)professorDB).getNome() + "\n");
 			}
 			
-			System.out.print("Opï¿½ï¿½o: " + numeroElementos + " - Retornar\n");
+			System.out.print("Opção: " + numeroElementos + " - Retornar\n");
 			
 			while(!isValidIndex(valorDigitado, listaProfessores)) {
-				System.out.print("\nEscolha uma opï¿½ï¿½o: ");
+				System.out.print("\nEscolha uma Opção: ");
 				
 				valorDigitado = menu.nextLine();
 				
@@ -283,7 +283,7 @@ public void AbrirMenu(Scanner menu) {
 					return null;
 				
 				if(!isValidIndex(valorDigitado, listaProfessores))
-					System.out.print("Opï¿½ï¿½o invï¿½lida.\n");
+					System.out.print("Opção inválida.\n");
 			}	
 			} catch (Exception e) {
 				System.out.print("Falha ao obter aluno da lista. Retorno: " + e.getMessage());
@@ -369,27 +369,27 @@ public void AbrirMenu(Scanner menu) {
 		try {
 			
 			if(listaDisciplinas.size() == 0) {
-				System.out.print("Nenhuma disciplina disponï¿½vies.\n"
+				System.out.print("Nenhuma disciplina disponíveis.\n"
 							   + "Realizar o cadastro atravï¿½s do menu Disciplinas.\n"
 							   + "Digite 'OK' para continuar.\n");
 				menu.nextLine();
 				return null;
 			}
 			
-			System.out.print("\nLista de disciplinas disponï¿½vies:\n\n");
+			System.out.print("\nLista de disciplinas disponíveis:\n\n");
 			
 			
 			for (Object disciplinaBD : listaDisciplinas) {
 				
 				int indiceLista = listaDisciplinas.indexOf(disciplinaBD);
 				
-				System.out.print("Opï¿½ï¿½o: " + indiceLista + " - Nome: " + ((Disciplina)disciplinaBD).getNome() + "\n");
+				System.out.print("Opção: " + indiceLista + " - Nome: " + ((Disciplina)disciplinaBD).getNome() + "\n");
 			}
 			
-			System.out.print("Opï¿½ï¿½o: " + numeroElementos + " - Retornar\n");
+			System.out.print("Opção: " + numeroElementos + " - Retornar\n");
 			
 			while(!isValidIndex(valorDigitado, listaDisciplinas)) {
-				System.out.print("\nEscolha uma opï¿½ï¿½o: ");
+				System.out.print("\nEscolha uma Opção: ");
 				
 				valorDigitado = menu.nextLine();
 				
@@ -402,7 +402,7 @@ public void AbrirMenu(Scanner menu) {
 				System.out.print("\n"+disc);
 				
 				if(!isValidIndex(valorDigitado, listaDisciplinas))
-					System.out.print("Opï¿½ï¿½o invï¿½lida.\n");
+					System.out.print("Opção inválida.\n");
 			}	
 			
 			} catch (Exception e) {
