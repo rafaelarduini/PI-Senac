@@ -1,7 +1,3 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,11 +9,11 @@ public class MenuFornecedor {
 		
 			while (true) {
 				System.out.print("\nMenu Fornecedor\n\n");
-		        System.out.print("Opï¿½ï¿½o 1 - Cadastrar \n");
-		        System.out.print("Opï¿½ï¿½o 2 - Atualizar \n");
-		        System.out.print("Opï¿½ï¿½o 3 - Excluir \n");
-		        System.out.print("Opï¿½ï¿½o 4 - Retornar \n\n");
-		        System.out.print("Digite uma opï¿½ï¿½o: ");
+		        System.out.print("Opção 1 - Cadastrar \n");
+		        System.out.print("Opção 2 - Atualizar \n");
+		        System.out.print("Opção 3 - Excluir \n");
+		        System.out.print("Opção 4 - Retornar \n\n");
+		        System.out.print("Digite uma Opção: ");
 		
 		        String opcao = menu.nextLine();
 		
@@ -38,7 +34,7 @@ public class MenuFornecedor {
 		        	return;
 		
 		        default:
-		            System.out.print("\nOpï¿½ï¿½o Invï¿½lida!\n");
+		            System.out.print("\nOpção Inválida!\n");
 		            break;		            
 		        }
 			}
@@ -56,7 +52,7 @@ public class MenuFornecedor {
 					
 					newFornecedor = ObtemDadosFornecedor(newFornecedor, menu);
 					
-					System.out.print("\nCadastrar endereï¿½o? (S/N) ");			
+					System.out.print("\nCadastrar endereço? (S/N) ");			
 					if(menu.nextLine().toUpperCase().contains("S")) {
 						newFornecedor.setEndereco(ObtemDadosEndereco(menu));
 					}
@@ -89,9 +85,7 @@ public class MenuFornecedor {
 		}
 		
 		private Fornecedor ObtemDadosFornecedor(Fornecedor fornecedor, Scanner menu) {
-
-			String valorDigitado = null;
-			
+					
 			try {			
 				System.out.print("\nDados do Fornecedor\n\n");
 				
@@ -159,7 +153,7 @@ public class MenuFornecedor {
 				novoEndereco.setEstado(menu.nextLine());
 				
 			} catch (Exception e) {
-				System.out.print("Falha ao obter dados de Endereï¿½o. Retorno: " + e.getMessage());
+				System.out.print("Falha ao obter dados de endereço. Retorno: " + e.getMessage());
 			}	
 			return novoEndereco;
 		}
@@ -167,7 +161,7 @@ public class MenuFornecedor {
 		
 		
 		private void Atualizar(Scanner menu) {
-		// TODO Auto-generated method stub
+
 			try {
 				
 				while(true) {
@@ -217,18 +211,18 @@ public class MenuFornecedor {
 					Fornecedor fornecedorSelecionado = ObtemFornecedorSelecionado(menu);
 					
 					if(fornecedorSelecionado == null) {
-						System.out.print("Exclusï¿½o cancelada.\n");
+						System.out.print("Exclusão cancelada.\n");
 						break;
 					}
 					
 					System.out.print(fornecedorSelecionado);
 			        
-			        System.out.print("Confirmar exclusï¿½o? (S/N) ");
+			        System.out.print("Confirmar exclusão? (S/N) ");
 					
 					if(menu.nextLine().toUpperCase().contains("S")) {
 						fornecedorSelecionado.Remover();
 						
-						System.out.print("Realizar nova exclusï¿½o? (S/N) ");
+						System.out.print("Realizar nova exclusão? (S/N) ");
 						
 						if(menu.nextLine().toUpperCase().toUpperCase().contains("S"))
 							continue;					
@@ -236,7 +230,7 @@ public class MenuFornecedor {
 							break;
 						
 					}else {	
-						System.out.print("Atualizaï¿½ï¿½o cancelada.\n");
+						System.out.print("Atualização cancelada.\n");
 						break;
 					}	
 				}
@@ -258,7 +252,7 @@ public class MenuFornecedor {
 				
 				if(numeroElementos == 0) {
 					System.out.print("Nenhum fornecedor disponÃ­vel.\n"
-								   + "Realizar o cadastro atravÃ©s do menu Cadastrar.\n"
+								   + "Realizar o cadastro através do menu Cadastrar.\n"
 								   + "Digite 'OK' para continuar.\n");
 					menu.nextLine();
 					return null;
@@ -270,13 +264,13 @@ public class MenuFornecedor {
 					
 					int indiceLista = listaFornecedores.indexOf(fornecedorBD);
 					
-					System.out.print("OpÃ§Ã£o: " + indiceLista + " - Nome: " + ((Fornecedor)fornecedorBD).getNome() + "\n");
+					System.out.print("Opção: " + indiceLista + " - Nome: " + ((Fornecedor)fornecedorBD).getNome() + "\n");
 				}
 				
-				System.out.print("OpÃ§Ã£o: " + numeroElementos + " - Retornar\n");
+				System.out.print("Opção: " + numeroElementos + " - Retornar\n");
 				
 				while(!isValidIndex(valorDigitado, listaFornecedores)) {
-					System.out.print("\nEscolha uma opï¿½ï¿½o: ");
+					System.out.print("\nEscolha uma Opção: ");
 					
 					valorDigitado = menu.nextLine();
 					
@@ -284,7 +278,7 @@ public class MenuFornecedor {
 						return null;
 					
 					if(!isValidIndex(valorDigitado, listaFornecedores))
-						System.out.print("OpÃ§Ã£o invÃ¡lida.\n");
+						System.out.print("Opção inválida.\n");
 				}	
 				} catch (Exception e) {
 					System.out.print("Falha ao obter aluno da lista. Retorno: " + e.getMessage());
@@ -292,9 +286,7 @@ public class MenuFornecedor {
 			
 			return (Fornecedor)(listaFornecedores.get(Integer.parseInt(valorDigitado)));
 				
-		}
-		
-		
+		}		
 
 		private boolean isValidIndex(String text, List<Object> lista) {
 			
@@ -316,9 +308,5 @@ public class MenuFornecedor {
 		        return false;
 		    }
 		}
-		
-
-
-
 
 }
