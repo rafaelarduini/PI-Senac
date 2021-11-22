@@ -1,6 +1,5 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,7 +29,7 @@ public void AbrirMenu(Scanner menu) {
 	            break;
 	
 	        case "3":
-	        	//TODO:Excluir();
+	        	Excluir(menu);
 	            break;		            
 	            
 	        case "4":
@@ -64,8 +63,7 @@ private void Cadastrar(Scanner menu) {
 			System.out.print("\nCadastrar disciplinas ministradas? (S/N) ");			
 			if(menu.nextLine().toUpperCase().contains("S")) {
 				novoProfessor = ObtemDadosDisciplina(novoProfessor, menu);
-			}
-		
+			}		
 		
 			System.out.print("\nDados do novo cadastro\n\n");
 					
@@ -129,9 +127,6 @@ private Professor ObtemDadosProfessor(Professor professor, Scanner menu) {
 		professor.setValorHoraAula(Integer.parseInt(menu.nextLine()));
 		
 		professor.CalculaSalario();
-		
-		//System.out.print("Informe o valor do salÃ¡rio:\n");		
-		//professor.setSalario(Integer.parseInt(menu.nextLine()));
 		
 	}catch(ParseException e) {
 		System.out.print("Falha ao obter dados do Professor. Retorno: " + e.getMessage());
@@ -297,9 +292,7 @@ private Professor ObtemProfessorSelecionado(Scanner menu) {
 	return (Professor)(listaProfessores.get(Integer.parseInt(valorDigitado)));
 }
 
-private Professor ObtemDadosDisciplina(Professor novoProfessor ,Scanner menu) {
-	
-	//var novaDisciplina = new Disciplina();
+private Professor ObtemDadosDisciplina(Professor novoProfessor ,Scanner menu) {	
 			
 	try {		
 		System.out.print("\nSelecionar disciplinas do professor\n");
@@ -311,10 +304,6 @@ private Professor ObtemDadosDisciplina(Professor novoProfessor ,Scanner menu) {
 			if(disciplinaSelecionada == null) {
 				return null;
 			}
-			
-			//var novaDisciplinaCursada = new DisciplinaCursada(disciplinaSelecionada);
-			
-			//System.out.print("\n\n" + disciplinaSelecionada);
 			
 			System.out.print("\n\nAdicionar? (S/N) ");
 			
@@ -349,10 +338,6 @@ private Professor AtualizaDisciplinaMinistradas(Professor novoProfessor ,Scanner
 			if(disciplinaSelecionada == null) {
 				return null;
 			}
-			
-			//var novaDisciplinaCursada = new DisciplinaCursada(disciplinaSelecionada);
-			
-			//System.out.print("\n\n" + disciplinaSelecionada);
 			
 			System.out.print("\n\nAdicionar? (S/N) ");
 			
@@ -425,6 +410,43 @@ private Disciplina ObtemDisciplinaSelecionada(Scanner menu) {
 		}
 	
 	return (Disciplina)(listaDisciplinas.get(Integer.parseInt(valorDigitado)));
+}
+
+private void Excluir(Scanner menu) {
+	
+	try {
+		
+		while(true) {
+			
+			Professor professorSelecionado = ObtemProfessorSelecionado(menu);
+			
+			if(professorSelecionado == null) {
+				System.out.print("Exclusão cancelada.\n");
+				break;
+			}
+			
+			System.out.print(professorSelecionado);
+	        
+	        System.out.print("Confirmar exclusão? (S/N) ");
+			
+			if(menu.nextLine().toUpperCase().contains("S")) {
+				professorSelecionado.Remover();
+				
+				System.out.print("Realizar nova exclusão? (S/N) ");
+				
+				if(menu.nextLine().toUpperCase().toUpperCase().contains("S"))
+					continue;					
+				else
+					break;
+				
+			}else {	
+				System.out.print("Atualização cancelada.\n");
+				break;
+			}	
+		}
+	} catch (Exception e) {
+		System.out.print("Falha ao excluir Professor. Retorno: " + e.getMessage());
+	}	
 }
 
 

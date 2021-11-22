@@ -156,9 +156,7 @@ public class MenuFornecedor {
 				System.out.print("Falha ao obter dados de endereço. Retorno: " + e.getMessage());
 			}	
 			return novoEndereco;
-		}
-		
-		
+		}		
 		
 		private void Atualizar(Scanner menu) {
 
@@ -198,9 +196,7 @@ public class MenuFornecedor {
 				System.out.print("Falha ao atualizar Fornecedor. Retorno: " + e.getMessage());
 			}
 
-		}
-		
-		
+		}		
 		
 		private void Excluir(Scanner menu) {
 			
@@ -239,7 +235,6 @@ public class MenuFornecedor {
 			}	
 		
 		}
-
 		
 		private Fornecedor ObtemFornecedorSelecionado(Scanner menu) {
 			
