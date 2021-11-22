@@ -282,7 +282,7 @@ public class MenuFornecedor {
 			return (Fornecedor)(listaFornecedores.get(Integer.parseInt(valorDigitado)));
 				
 		}		
-
+		
 		private boolean isValidIndex(String text, List<Object> lista) {
 			
 			    try {
@@ -303,5 +303,4 @@ public class MenuFornecedor {
 		        return false;
 		    }
 		}
-
 }
