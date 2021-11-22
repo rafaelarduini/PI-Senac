@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -69,13 +70,21 @@ public class Professor extends PessoaFisica{
 	public double getSalario() {
 		return Salario;
 	}
+	
+	public void setSalario(double salario) {
+		Salario = salario;
+	}
 
 	public void setDisciplinaMinistrada(Disciplina disciplinaMinistrada) {
 		DisciplinasMinistradas.add(disciplinaMinistrada);
 		CalculaSalario();
 	}
+	public void apagarDisciplinas() {
+		DisciplinasMinistradas = new ArrayList<Disciplina>();
+	}
 
 	public void CalculaSalario() {		
+		Salario = 0;
 		for (Disciplina disciplina : DisciplinasMinistradas) {
 			Salario += disciplina.getCargaHoraria() * ValorHoraAula;
 		}
@@ -203,5 +212,16 @@ public class Professor extends PessoaFisica{
 	           return true;
 	   }
 	    return false;
+	}
+	
+	@Override
+	public String toString() {
+		String result = this.DisciplinasMinistradas.stream()
+			      .map(n -> String.valueOf(n))
+			      .collect(Collectors.joining("\n", "", "\n"));
+			 
+			    System.out.println(result);
+		return String.format("%s\nDepartamento\n%s",
+        		super.toString(), this.Departamento + "\n") + "\nDisciplinas Minitradas\n" + result + "\nValor da hora aula\n" + this.ValorHoraAula + "\n"  + "\nSalário\n" + this.Salario + "\n\n";
 	}
 }
