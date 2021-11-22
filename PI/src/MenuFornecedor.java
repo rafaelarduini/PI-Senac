@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -166,7 +168,42 @@ public class MenuFornecedor {
 		
 		private void Atualizar(Scanner menu) {
 		// TODO Auto-generated method stub
-		
+			try {
+				
+				while(true) {
+					
+					Fornecedor fornecedorSelecionado = ObtemFornecedorSelecionado(menu);	
+					
+					if(fornecedorSelecionado == null) {
+						System.out.print("Atualização cancelada.\n");
+						break;
+					}
+					  	
+					fornecedorSelecionado = ObtemDadosFornecedor(fornecedorSelecionado, menu);     	
+			         
+			        System.out.print(fornecedorSelecionado);
+			        
+			        System.out.print("\n\nConfirmar atualização? (S/N) ");
+					
+					if(menu.nextLine().toUpperCase().contains("S")) {
+						fornecedorSelecionado.Atualizar();
+						
+						System.out.print("Realizar nova atualização? (S/N) ");
+						
+						if(menu.nextLine().toUpperCase().contains("S"))
+							continue;					
+						else
+							break;
+						
+					}else {	
+						System.out.print("Atualização cancelada.\n");
+						break;
+					}	
+				}
+			} catch (Exception e) {
+				System.out.print("Falha ao atualizar Fornecedor. Retorno: " + e.getMessage());
+			}
+
 		}
 		
 		
